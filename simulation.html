@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Live AI Traffic Simulation — Watch adaptive signal control in action with animated vehicles and real-time data.">
+  <title>Live Simulation — TrafficAI</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main>
+    <div class="dashboard" style="padding-top: calc(var(--nav-height) + 1rem);">
+      <!-- Main Canvas -->
+      <div class="sim-canvas-wrap">
+        <div style="display:flex; justify-content:space-between; width:100%; margin-bottom:0.8rem; align-items:center;">
+          <h2 style="font-size:1.1rem; font-weight:700;">🚦 Live Intersection</h2>
+          <span id="sim-status"
+            style="font-size:0.8rem; padding:0.3rem 0.8rem; border-radius:50px; background:rgba(239,68,68,0.15); color:var(--red); font-weight:600;">⏸
+            Stopped</span>
+        </div>
+        <canvas id="sim-canvas" width="600" height="600"></canvas>
+        <div style="display:flex; gap:0.8rem; margin-top:1rem; flex-wrap:wrap; justify-content:center;">
+          <button id="btn-start" class="btn btn-primary" style="padding:0.6rem 1.5rem; font-size:0.9rem;">▶ Start
+            Simulation</button>
+          <button id="btn-reset" class="btn btn-secondary" style="padding:0.6rem 1.5rem; font-size:0.9rem;">↻
+            Reset</button>
+        </div>
+      </div>
+
+      <!-- Sidebar Controls -->
+      <div class="sidebar">
+        <!-- Traffic Lights Panel -->
+        <div class="panel">
+          <div class="panel-title">🚦 Signal Status</div>
+          <div class="traffic-lights">
+            <div class="tl-item" id="tl-north">
+              <span class="tl-label">N</span>
+              <div class="tl-lights">
+                <div class="tl-bulb red on"></div>
+                <div class="tl-bulb yellow"></div>
+                <div class="tl-bulb green"></div>
+              </div>
+              <span class="tl-timer">--</span>
+            </div>
+            <div class="tl-item" id="tl-south">
+              <span class="tl-label">S</span>
+              <div class="tl-lights">
+                <div class="tl-bulb red on"></div>
+                <div class="tl-bulb yellow"></div>
+                <div class="tl-bulb green"></div>
+              </div>
+              <span class="tl-timer">--</span>
+            </div>
+            <div class="tl-item" id="tl-east">
+              <span class="tl-label">E</span>
+              <div class="tl-lights">
+                <div class="tl-bulb red on"></div>
+                <div class="tl-bulb yellow"></div>
+                <div class="tl-bulb green"></div>
+              </div>
+              <span class="tl-timer">--</span>
+            </div>
+            <div class="tl-item" id="tl-west">
+              <span class="tl-label">W</span>
+              <div class="tl-lights">
+                <div class="tl-bulb red on"></div>
+                <div class="tl-bulb yellow"></div>
+                <div class="tl-bulb green"></div>
+              </div>
+              <span class="tl-timer">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Density Panel -->
+        <div class="panel">
+          <div class="panel-title">📊 Traffic Density</div>
+          <div id="density-bars">
+            <div class="density-bar-wrap">
+              <div class="density-label"><span>North</span><span id="density-n-val">0%</span></div>
+              <div class="density-track">
+                <div class="density-fill low" id="density-n" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="density-bar-wrap">
+              <div class="density-label"><span>South</span><span id="density-s-val">0%</span></div>
+              <div class="density-track">
+                <div class="density-fill low" id="density-s" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="density-bar-wrap">
+              <div class="density-label"><span>East</span><span id="density-e-val">0%</span></div>
+              <div class="density-track">
+                <div class="density-fill low" id="density-e" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="density-bar-wrap">
+              <div class="density-label"><span>West</span><span id="density-w-val">0%</span></div>
+              <div class="density-track">
+                <div class="density-fill low" id="density-w" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls Panel -->
+        <div class="panel">
+          <div class="panel-title">⚙️ Controls</div>
+          <div class="controls-grid">
+            <div class="control-row">
+              <label>Speed</label>
+              <input type="range" id="speed-slider" class="speed-slider" min="1" max="5" value="2">
+              <span id="speed-val" style="font-size:0.82rem; font-weight:600; min-width:24px;">2x</span>
+            </div>
+            <div class="control-row">
+              <label>🚨 Emergency</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="emergency-toggle">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="control-row" id="emergency-road-row" style="display:none;">
+              <label>Road</label>
+              <select id="emergency-road" class="road-select">
+                <option value="north">North</option>
+                <option value="south">South</option>
+                <option value="east">East</option>
+                <option value="west">West</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Log Panel -->
+        <div class="panel">
+          <div class="panel-title">🤖 AI Decision Log</div>
+          <div class="status-log" id="ai-log">
+            <div class="log-entry">
+              <span class="log-time">--:--</span>
+              <span class="log-msg">Waiting to start simulation...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/main.js"></script>
+  <script src="js/traffic-ai.js"></script>
+  <script src="js/vehicle.js"></script>
+  <script src="js/simulation.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Traffic data visualization — charts, graphs, and signal timing history for the AI Traffic Control System.">
+  <title>Analytics — TrafficAI</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main>
+    <section class="hero" style="padding: 4rem 2rem 3rem;">
+      <div class="hero-content">
+        <span class="hero-badge">📊 Data Dashboard</span>
+        <h1>Traffic Analytics</h1>
+        <p>Real-time visualization of congestion levels, signal timing distribution, and historical data.</p>
+      </div>
+    </section>
+
+    <div style="text-align:center; padding:1rem 2rem 0;">
+      <button id="viz-toggle" class="btn btn-primary" style="font-size:0.85rem; padding:0.5rem 1.5rem;">▶ Start Live Updates</button>
+      <span style="font-size:0.8rem; color:var(--text-muted); margin-left:0.5rem;">Updates every 3 seconds</span>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>📊 Current Congestion Levels</h3>
+        <canvas id="chart-congestion"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>📈 Congestion History</h3>
+        <canvas id="chart-history"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>🍩 Signal Time Distribution</h3>
+        <canvas id="chart-signal-dist"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>📋 Signal Timing Log</h3>
+        <div style="max-height:300px; overflow-y:auto;">
+          <table class="data-table" id="timing-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Road</th>
+                <th>Signal</th>
+                <th>Duration</th>
+                <th>Congestion</th>
+              </tr>
+            </thead>
+            <tbody id="timing-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/main.js"></script>
+  <script src="js/visualization.js"></script>
+</body>
+</html>

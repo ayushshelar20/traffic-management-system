@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn how the AI-Based Smart Traffic Control System works — from data collection to adaptive signal control.">
+  <title>How It Works — TrafficAI</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main>
+    <section class="hero" style="padding: 4rem 2rem 3rem;">
+      <div class="hero-content">
+        <span class="hero-badge">📖 Step-by-Step Process</span>
+        <h1>How It Works</h1>
+        <p>Our AI controller follows a continuous loop — fetching data, analyzing congestion, making decisions, and adapting signals in real-time.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">System Flowchart</h2>
+      <p class="section-subtitle">Each cycle runs every few seconds, continuously optimizing traffic flow.</p>
+
+      <div class="flow-container">
+        <div class="flow-line"></div>
+
+        <div class="flow-step">
+          <div class="flow-card">
+            <div class="step-num">Step 1</div>
+            <h3>📡 Fetch Traffic Data</h3>
+            <p>The system collects real-time traffic data from APIs (Google Maps Distance Matrix) or uses simulated sensor data for each road approaching the intersection.</p>
+          </div>
+          <div class="flow-dot"></div>
+          <div style="width:calc(50% - 40px)"></div>
+        </div>
+
+        <div class="flow-step">
+          <div style="width:calc(50% - 40px)"></div>
+          <div class="flow-dot"></div>
+          <div class="flow-card">
+            <div class="step-num">Step 2</div>
+            <h3>🧠 Send to AI Controller</h3>
+            <p>Raw travel time and delay data is fed into the AI decision engine for analysis. The controller maintains state for all four roads.</p>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-card">
+            <div class="step-num">Step 3</div>
+            <h3>📊 Analyze Congestion</h3>
+            <p>Congestion ratio is calculated: <strong>congestion = current_travel_time / normal_travel_time</strong>. A ratio > 1.5 means heavy traffic.</p>
+          </div>
+          <div class="flow-dot"></div>
+          <div style="width:calc(50% - 40px)"></div>
+        </div>
+
+        <div class="flow-step">
+          <div style="width:calc(50% - 40px)"></div>
+          <div class="flow-dot"></div>
+          <div class="flow-card">
+            <div class="step-num">Step 4</div>
+            <h3>🏆 Identify Priority Road</h3>
+            <p>The AI compares congestion levels across all roads and identifies which road has the highest traffic density and needs green signal most urgently.</p>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-card">
+            <div class="step-num">Step 5</div>
+            <h3>⏱️ Adjust Signal Timing</h3>
+            <p>Green signal duration is dynamically calculated: higher congestion = longer green time (15–60 seconds). Other roads get proportional wait times.</p>
+          </div>
+          <div class="flow-dot"></div>
+          <div style="width:calc(50% - 40px)"></div>
+        </div>
+
+        <div class="flow-step emergency">
+          <div style="width:calc(50% - 40px)"></div>
+          <div class="flow-dot"></div>
+          <div class="flow-card">
+            <div class="step-num" style="color:var(--red)">Decision Point</div>
+            <h3>🚑 Emergency Vehicle Check</h3>
+            <p>The system checks if an emergency vehicle is detected on any road. This is the critical branching point in the control loop.</p>
+          </div>
+        </div>
+
+        <div class="flow-step emergency">
+          <div class="flow-card">
+            <div class="step-num" style="color:var(--red)">If YES</div>
+            <h3>🚨 Emergency Override</h3>
+            <p>Immediately switch the emergency road to GREEN and all others to RED. The override lasts until the vehicle passes, then normal control resumes.</p>
+          </div>
+          <div class="flow-dot"></div>
+          <div style="width:calc(50% - 40px)"></div>
+        </div>
+
+        <div class="flow-step">
+          <div style="width:calc(50% - 40px)"></div>
+          <div class="flow-dot"></div>
+          <div class="flow-card">
+            <div class="step-num" style="color:var(--green)">If NO</div>
+            <h3>✅ Continue Adaptive Control</h3>
+            <p>Normal AI-based adaptive control continues. The system cycles through roads based on calculated priorities and dynamic timing.</p>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-card">
+            <div class="step-num">Continuous</div>
+            <h3>🔄 Repeat in Real-Time</h3>
+            <p>The entire process repeats every cycle (configurable: 2–10 seconds), ensuring the intersection adapts continuously to changing conditions.</p>
+          </div>
+          <div class="flow-dot"></div>
+          <div style="width:calc(50% - 40px)"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Algorithm Details -->
+    <section class="section" style="background: var(--gradient-card); border-radius: var(--radius); margin: 0 2rem;">
+      <h2 class="section-title">The Algorithm</h2>
+      <p class="section-subtitle">Core logic behind the AI decision engine.</p>
+      <div class="grid-2">
+        <div class="card fade-in">
+          <h3>📐 Congestion Formula</h3>
+          <p style="font-family:'Courier New',monospace; background:var(--bg-primary); padding:1rem; border-radius:8px; margin-top:0.8rem; font-size:0.9rem;">
+            congestion_ratio = current_time / normal_time<br><br>
+            if ratio &lt; 1.2 → Low traffic<br>
+            if ratio 1.2–1.8 → Medium traffic<br>
+            if ratio &gt; 1.8 → High traffic
+          </p>
+        </div>
+        <div class="card fade-in">
+          <h3>⏱️ Dynamic Timing</h3>
+          <p style="font-family:'Courier New',monospace; background:var(--bg-primary); padding:1rem; border-radius:8px; margin-top:0.8rem; font-size:0.9rem;">
+            green_duration = base_time + (ratio × factor)<br><br>
+            Minimum: 15 seconds<br>
+            Maximum: 60 seconds<br>
+            Emergency: Instant override
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="text-align:center;">
+      <h2 class="section-title">See It Live</h2>
+      <p class="section-subtitle">Watch the algorithm in action on our interactive simulation dashboard.</p>
+      <a href="simulation.html" class="btn btn-primary">🚀 Launch Simulation</a>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

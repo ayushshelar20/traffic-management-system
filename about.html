@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About the AI-Based Smart Traffic Control System project — technologies, team, and hybrid approach.">
+  <title>About — TrafficAI</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main>
+    <section class="hero" style="padding: 4rem 2rem 3rem;">
+      <div class="hero-content">
+        <span class="hero-badge">ℹ️ About This Project</span>
+        <h1>About TrafficAI</h1>
+        <p>A college mini project demonstrating how AI and real-time data can revolutionize urban traffic management.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="about-grid">
+        <div class="card fade-in">
+          <h3>📋 Project Description</h3>
+          <p>TrafficAI is an AI-Based Smart Traffic Control System that combines real-world traffic data with visual simulation to demonstrate adaptive signal control. The system dynamically adjusts traffic signal timings based on real-time congestion levels and provides emergency vehicle priority override.</p>
+          <p style="margin-top:1rem;">This project serves as a practical demonstration of how artificial intelligence can be applied to solve real-world urban traffic problems without requiring physical hardware or cameras.</p>
+        </div>
+
+        <div class="card fade-in">
+          <h3>🔀 Hybrid Approach</h3>
+          <p><strong>Real Data Component:</strong> The system is designed to fetch live traffic data from Google Maps Distance Matrix API, providing actual travel times and congestion information for real roads.</p>
+          <p style="margin-top:0.8rem;"><strong>Simulation Component:</strong> A visual simulation layer renders an animated intersection with moving vehicles that respond to signal changes. When API data is unavailable, realistic random data is generated.</p>
+          <p style="margin-top:0.8rem;"><strong>Why Hybrid?</strong> This approach ensures the demo works reliably for presentations while still demonstrating real-world API integration concepts.</p>
+        </div>
+
+        <div class="card fade-in">
+          <h3>🛠️ Technologies Used</h3>
+          <div class="tech-badges">
+            <span class="tech-badge">HTML5</span>
+            <span class="tech-badge">CSS3</span>
+            <span class="tech-badge">JavaScript ES6+</span>
+            <span class="tech-badge">Canvas API</span>
+            <span class="tech-badge">Chart.js</span>
+            <span class="tech-badge">Google Fonts</span>
+            <span class="tech-badge">CSS Animations</span>
+            <span class="tech-badge">LocalStorage API</span>
+            <span class="tech-badge">Intersection Observer</span>
+          </div>
+          <p style="margin-top:1rem; font-size:0.88rem; color:var(--text-secondary);">
+            <strong>Architecture:</strong> Pure client-side application with no build tools required. Uses CDN-hosted libraries and ES6 features supported by all modern browsers.
+          </p>
+        </div>
+
+        <div class="card fade-in">
+          <h3>🚀 How to Run</h3>
+          <p style="font-family:'Courier New',monospace; background:var(--bg-primary); padding:1rem; border-radius:8px; margin-top:0.8rem; font-size:0.85rem; line-height:1.8;">
+            # Option 1: VS Code Live Server<br>
+            1. Open project folder in VS Code<br>
+            2. Install "Live Server" extension<br>
+            3. Right-click index.html → Open with Live Server<br><br>
+            # Option 2: npx serve<br>
+            npx serve .<br><br>
+            # Option 3: Python<br>
+            python -m http.server 8000
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Team</h2>
+      <p class="section-subtitle">The minds behind TrafficAI.</p>
+      <div style="max-width:500px; margin:0 auto;">
+        <div class="team-member fade-in">
+          <div class="member-avatar">S</div>
+          <div class="member-info">
+            <h4>Student Name</h4>
+            <p>B.Tech Computer Science — 2026</p>
+          </div>
+        </div>
+        <div class="team-member fade-in">
+          <div class="member-avatar">G</div>
+          <div class="member-info">
+            <h4>Guide Name</h4>
+            <p>Project Guide — Department of CSE</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>
