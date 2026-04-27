@@ -7,6 +7,7 @@
   <title>TrafficAI — Smart Traffic Control System</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/enhancements.css">
 </head>
 <body>
   <div id="navbar-placeholder"></div>
@@ -14,70 +15,32 @@
   <main>
     <!-- Hero -->
     <section class="hero">
+      <canvas id="hero-particles"></canvas>
       <div class="hero-content">
         <span class="hero-badge">🚦 College Mini Project 2026</span>
         <h1>AI-Based Smart Traffic Control System</h1>
         <p>A hybrid simulation combining real-world traffic data with intelligent signal control. 
            Watch AI dynamically manage intersections, reduce congestion, and prioritize emergency vehicles — all in real-time.</p>
-        <a href="simulation.html" class="btn btn-hero">🚀 Launch Simulation</a>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="simulation.html" class="btn btn-hero">🚀 Launch Simulation</a>
+          <a href="how-it-works.html" class="btn btn-secondary" style="background:rgba(255,255,255,0.15); color:#fff; border-color:rgba(255,255,255,0.3);">📖 How It Works</a>
+        </div>
       </div>
     </section>
 
-    <!-- Problem Section -->
+    <!-- Stats -->
     <section class="section">
-      <h2 class="section-title">The Problem</h2>
-      <p class="section-subtitle">Urban traffic congestion costs billions in wasted fuel, lost productivity, and increased emissions every year.</p>
-      <div class="grid-3">
-        <div class="card fade-in">
-          <div class="card-icon">🚗</div>
-          <h3>Growing Congestion</h3>
-          <p>Urban populations are rising rapidly, leading to more vehicles and longer commute times at intersections.</p>
-        </div>
-        <div class="card fade-in">
-          <div class="card-icon">⏱️</div>
-          <h3>Fixed Signal Timers</h3>
-          <p>Traditional traffic lights use fixed timers that ignore real-time conditions, creating unnecessary delays.</p>
-        </div>
-        <div class="card fade-in">
-          <div class="card-icon">🚑</div>
-          <h3>Emergency Delays</h3>
-          <p>Emergency vehicles like ambulances often get stuck at red lights, costing critical minutes during emergencies.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Solution Section -->
-    <section class="section" style="background: var(--gradient-card); border-radius: var(--radius); margin: 0 2rem;">
-      <h2 class="section-title">Our Solution</h2>
-      <p class="section-subtitle">An AI-powered adaptive traffic control system that thinks, learns, and responds in real-time.</p>
-      <div class="grid-3">
-        <div class="card fade-in">
-          <div class="card-icon">📡</div>
-          <h3>Real-Time Data</h3>
-          <p>Fetches live traffic data from APIs to understand current road conditions and congestion levels.</p>
-        </div>
-        <div class="card fade-in">
-          <div class="card-icon">🧠</div>
-          <h3>AI Decision Engine</h3>
-          <p>Analyzes congestion ratios across all roads and dynamically assigns optimal green signal durations.</p>
-        </div>
-        <div class="card fade-in">
-          <div class="card-icon">🚨</div>
-          <h3>Emergency Priority</h3>
-          <p>Instantly overrides signals to give green passage to emergency vehicles, then resumes normal control.</p>
-        </div>
-      </div>
       <div class="stats-row fade-in">
         <div class="stat-item">
-          <div class="stat-value">40%</div>
+          <div class="stat-value" data-count="40">0%</div>
           <div class="stat-label">Less Wait Time</div>
         </div>
         <div class="stat-item">
-          <div class="stat-value">60%</div>
+          <div class="stat-value" data-count="60">0%</div>
           <div class="stat-label">Faster Emergency Response</div>
         </div>
         <div class="stat-item">
-          <div class="stat-value">25%</div>
+          <div class="stat-value" data-count="25">0%</div>
           <div class="stat-label">Reduced Emissions</div>
         </div>
         <div class="stat-item">
@@ -87,30 +50,83 @@
       </div>
     </section>
 
-    <!-- How It Works Preview -->
+    <!-- Interactive Icon Sections -->
     <section class="section">
-      <h2 class="section-title">Key Features</h2>
-      <p class="section-subtitle">Everything you need to see intelligent traffic management in action.</p>
-      <div class="grid-2">
-        <div class="card fade-in">
-          <div class="card-icon">🗺️</div>
-          <h3>Live Intersection Simulation</h3>
-          <p>Watch an animated top-view intersection with moving vehicles, traffic lights, and density indicators — all controlled by our AI engine.</p>
+      <h2 class="section-title">Explore the System</h2>
+      <p class="section-subtitle">Click any card below to learn more.</p>
+
+      <div class="icon-cards-grid">
+        <!-- Problem Card -->
+        <div class="icon-card" id="card-problem" onclick="toggleIconCard(this)">
+          <div class="icon-card-header">
+            <div class="card-icon">🚗</div>
+            <h3>The Problem</h3>
+            <span class="expand-icon">▼</span>
+          </div>
+          <div class="icon-card-body">
+            <div class="sub-card">
+              <h4>🚗 Growing Congestion</h4>
+              <p>Urban populations are rising rapidly, leading to more vehicles and longer commute times at intersections.</p>
+            </div>
+            <div class="sub-card">
+              <h4>⏱️ Fixed Signal Timers</h4>
+              <p>Traditional traffic lights use fixed timers that ignore real-time conditions, creating unnecessary delays.</p>
+            </div>
+            <div class="sub-card">
+              <h4>🚑 Emergency Delays</h4>
+              <p>Emergency vehicles like ambulances often get stuck at red lights, costing critical minutes during emergencies.</p>
+            </div>
+          </div>
         </div>
-        <div class="card fade-in">
-          <div class="card-icon">📊</div>
-          <h3>Data Visualization Dashboard</h3>
-          <p>Interactive charts showing congestion trends, signal timing history, and performance metrics updated in real-time.</p>
+
+        <!-- Solution Card -->
+        <div class="icon-card" id="card-solution" onclick="toggleIconCard(this)">
+          <div class="icon-card-header">
+            <div class="card-icon">🧠</div>
+            <h3>Our Solution</h3>
+            <span class="expand-icon">▼</span>
+          </div>
+          <div class="icon-card-body">
+            <div class="sub-card">
+              <h4>📡 Real-Time Data</h4>
+              <p>Fetches live traffic data from APIs to understand current road conditions and congestion levels.</p>
+            </div>
+            <div class="sub-card">
+              <h4>🧠 AI Decision Engine</h4>
+              <p>Analyzes congestion ratios across all roads and dynamically assigns optimal green signal durations.</p>
+            </div>
+            <div class="sub-card">
+              <h4>🚨 Emergency Priority</h4>
+              <p>Instantly overrides signals to give green passage to emergency vehicles, then resumes normal control.</p>
+            </div>
+          </div>
         </div>
-        <div class="card fade-in">
-          <div class="card-icon">⚡</div>
-          <h3>Emergency Override System</h3>
-          <p>Toggle emergency mode for any road — the AI instantly clears a path with green signals and sound alerts.</p>
-        </div>
-        <div class="card fade-in">
-          <div class="card-icon">🔄</div>
-          <h3>Hybrid Data Approach</h3>
-          <p>Combines real-world traffic API data with simulation, ensuring the demo works reliably while showcasing real concepts.</p>
+
+        <!-- Key Features Card -->
+        <div class="icon-card" id="card-features" onclick="toggleIconCard(this)">
+          <div class="icon-card-header">
+            <div class="card-icon">⚡</div>
+            <h3>Key Features</h3>
+            <span class="expand-icon">▼</span>
+          </div>
+          <div class="icon-card-body">
+            <div class="sub-card">
+              <h4>🗺️ Live Intersection Simulation</h4>
+              <p>Watch an animated top-view intersection with moving vehicles, traffic lights, and density indicators.</p>
+            </div>
+            <div class="sub-card">
+              <h4>📊 Data Visualization Dashboard</h4>
+              <p>Interactive charts showing congestion trends, signal timing history, and performance metrics.</p>
+            </div>
+            <div class="sub-card">
+              <h4>⚡ Emergency Override System</h4>
+              <p>Toggle emergency mode for any road — the AI instantly clears a path with green signals.</p>
+            </div>
+            <div class="sub-card">
+              <h4>🔄 Hybrid Data Approach</h4>
+              <p>Combines real-world traffic API data with simulation for reliable demos.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -128,5 +144,22 @@
 
   <div id="footer-placeholder"></div>
   <script src="js/main.js"></script>
+  <script>
+    // Toggle expandable icon cards
+    function toggleIconCard(card) {
+      const body = card.querySelector('.icon-card-body');
+      const isOpen = card.classList.contains('open');
+      // Close all cards first
+      document.querySelectorAll('.icon-card').forEach(c => {
+        c.classList.remove('open');
+        c.querySelector('.icon-card-body').classList.remove('open');
+      });
+      // Open clicked one (if it wasn't already open)
+      if (!isOpen) {
+        card.classList.add('open');
+        body.classList.add('open');
+      }
+    }
+  </script>
 </body>
 </html>

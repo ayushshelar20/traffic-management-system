@@ -19,8 +19,8 @@
   --radius: 16px;
   --radius-sm: 10px;
   --nav-height: 70px;
-  --gradient-hero: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-  --gradient-card: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(168,85,247,0.05));
+  --gradient-hero: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #9b3af6 100%);
+  --gradient-card: linear-gradient(135deg, rgba(112, 114, 225, 0.05), rgba(168,85,247,0.05));
   --glass-bg: rgba(255,255,255,0.6);
   --glass-border: rgba(255,255,255,0.3);
 }

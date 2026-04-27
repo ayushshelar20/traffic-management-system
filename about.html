@@ -7,6 +7,7 @@
   <title>About — TrafficAI</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/enhancements.css">
 </head>
 <body>
   <div id="navbar-placeholder"></div>
@@ -69,23 +70,146 @@
       </div>
     </section>
 
+    <!-- System Architecture -->
+    <section class="section">
+      <h2 class="section-title">System Architecture</h2>
+      <p class="section-subtitle">Data flow through the TrafficAI system.</p>
+      <div class="arch-flow fade-in">
+        <div class="arch-node">📡 Traffic Data<br><small style="color:var(--text-muted)">API / Sensors</small></div>
+        <span class="arch-arrow">→</span>
+        <div class="arch-node">🧠 AI Engine<br><small style="color:var(--text-muted)">Analysis</small></div>
+        <span class="arch-arrow">→</span>
+        <div class="arch-node">🚦 Signal Control<br><small style="color:var(--text-muted)">Optimization</small></div>
+        <span class="arch-arrow">→</span>
+        <div class="arch-node">📊 Dashboard<br><small style="color:var(--text-muted)">Visualization</small></div>
+      </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="section" style="background: var(--gradient-card); border-radius: var(--radius); margin: 0 2rem;">
+      <h2 class="section-title">Methodology</h2>
+      <p class="section-subtitle">Research methodology employed in this project.</p>
+      <div class="methodology-grid">
+        <div class="method-step fade-in">
+          <div class="step-icon">📚</div>
+          <h4>Literature Review</h4>
+          <p>Survey of existing ITS and adaptive signal systems</p>
+        </div>
+        <div class="method-step fade-in">
+          <div class="step-icon">🏗️</div>
+          <h4>System Design</h4>
+          <p>Architecture design with modular components</p>
+        </div>
+        <div class="method-step fade-in">
+          <div class="step-icon">💻</div>
+          <h4>Implementation</h4>
+          <p>Client-side web app with Canvas simulation</p>
+        </div>
+        <div class="method-step fade-in">
+          <div class="step-icon">🧪</div>
+          <h4>Testing</h4>
+          <p>Simulation testing with varied traffic scenarios</p>
+        </div>
+        <div class="method-step fade-in">
+          <div class="step-icon">📊</div>
+          <h4>Evaluation</h4>
+          <p>Performance metrics and comparison analysis</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
     <section class="section">
       <h2 class="section-title">Team</h2>
       <p class="section-subtitle">The minds behind TrafficAI.</p>
-      <div style="max-width:500px; margin:0 auto;">
-        <div class="team-member fade-in">
-          <div class="member-avatar">S</div>
-          <div class="member-info">
-            <h4>Student Name</h4>
-            <p>B.Tech Computer Science — 2026</p>
+
+      <div style="max-width:550px; margin:0 auto;">
+        <!-- Students Card -->
+        <div class="team-card" id="students-card">
+          <div class="team-card-header" onclick="toggleTeamCard('students-card')">
+            <div class="team-icon">🎓</div>
+            <h3>Students</h3>
+            <span class="expand-arrow">▼</span>
+          </div>
+          <div class="team-card-body" id="students-body">
+            <div class="student-row">
+              <span class="student-num">1.</span>
+              <input type="text" class="team-input" data-field="s1_name" placeholder="Add Name" disabled>
+              <input type="text" class="team-input" data-field="s1_roll" placeholder="Roll No." style="max-width:120px;" disabled>
+            </div>
+            <div class="student-row">
+              <span class="student-num">2.</span>
+              <input type="text" class="team-input" data-field="s2_name" placeholder="Add Name" disabled>
+              <input type="text" class="team-input" data-field="s2_roll" placeholder="Roll No." style="max-width:120px;" disabled>
+            </div>
+            <div class="student-row">
+              <span class="student-num">3.</span>
+              <input type="text" class="team-input" data-field="s3_name" placeholder="Add Name" disabled>
+              <input type="text" class="team-input" data-field="s3_roll" placeholder="Roll No." style="max-width:120px;" disabled>
+            </div>
+            <div class="student-row">
+              <span class="student-num">4.</span>
+              <input type="text" class="team-input" data-field="s4_name" placeholder="Add Name" disabled>
+              <input type="text" class="team-input" data-field="s4_roll" placeholder="Roll No." style="max-width:120px;" disabled>
+            </div>
+            <div class="team-actions">
+              <button class="team-btn team-btn-edit" onclick="enableEdit('students'); event.stopPropagation();">✏️ Edit</button>
+              <button class="team-btn team-btn-save" id="save-students" onclick="saveSection('students'); event.stopPropagation();" style="display:none;">💾 Save</button>
+              <span class="save-indicator" id="indicator-students"></span>
+            </div>
           </div>
         </div>
-        <div class="team-member fade-in">
-          <div class="member-avatar">G</div>
-          <div class="member-info">
-            <h4>Guide Name</h4>
-            <p>Project Guide — Department of CSE</p>
+
+        <!-- Guide Card -->
+        <div class="team-card" id="guide-card">
+          <div class="team-card-header" onclick="toggleTeamCard('guide-card')">
+            <div class="team-icon">👨‍🏫</div>
+            <h3>Project Guide</h3>
+            <span class="expand-arrow">▼</span>
           </div>
+          <div class="team-card-body" id="guide-body">
+            <div class="guide-field">
+              <label>Guide Name</label>
+              <input type="text" class="team-input" data-field="guide_name" placeholder="Add Guide Name" disabled>
+            </div>
+            <div class="guide-field">
+              <label>Department</label>
+              <input type="text" class="team-input" data-field="guide_dept" placeholder="e.g. Department of CSE" disabled>
+            </div>
+            <div class="guide-field">
+              <label>Designation (Optional)</label>
+              <input type="text" class="team-input" data-field="guide_designation" placeholder="e.g. Assistant Professor" disabled>
+            </div>
+            <div class="team-actions">
+              <button class="team-btn team-btn-edit" onclick="enableEdit('guide'); event.stopPropagation();">✏️ Edit</button>
+              <button class="team-btn team-btn-save" id="save-guide" onclick="saveSection('guide'); event.stopPropagation();" style="display:none;">💾 Save</button>
+              <span class="save-indicator" id="indicator-guide"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- References -->
+    <section class="section" style="text-align:center;">
+      <h2 class="section-title">References</h2>
+      <p class="section-subtitle">Key resources and standards that inspired this project.</p>
+      <div class="grid-2" style="max-width:800px; margin:0 auto;">
+        <div class="card fade-in" style="text-align:left;">
+          <h3>📄 Academic</h3>
+          <ul style="list-style:disc; padding-left:1.2rem; font-size:0.88rem; color:var(--text-secondary); line-height:2;">
+            <li>Intelligent Transportation Systems (IEEE)</li>
+            <li>Adaptive Traffic Signal Control — SCOOT/SCATS</li>
+            <li>Machine Learning for Urban Traffic (Springer)</li>
+          </ul>
+        </div>
+        <div class="card fade-in" style="text-align:left;">
+          <h3>🔗 Technical</h3>
+          <ul style="list-style:disc; padding-left:1.2rem; font-size:0.88rem; color:var(--text-secondary); line-height:2;">
+            <li>Google Maps Distance Matrix API</li>
+            <li>Chart.js — Data Visualization</li>
+            <li>HTML5 Canvas API — MDN Web Docs</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -93,5 +217,92 @@
 
   <div id="footer-placeholder"></div>
   <script src="js/main.js"></script>
+  <script>
+    // ===== EXPANDABLE TEAM CARDS =====
+    const TEAM_KEY = 'trafficai_team';
+
+    function toggleTeamCard(cardId) {
+      const card = document.getElementById(cardId);
+      const body = card.querySelector('.team-card-body');
+      const isOpen = card.classList.contains('open');
+      if (isOpen) {
+        card.classList.remove('open');
+        body.classList.remove('open');
+      } else {
+        card.classList.add('open');
+        body.classList.add('open');
+      }
+    }
+
+    // Load saved data from localStorage
+    function loadTeamData() {
+      try {
+        const saved = localStorage.getItem(TEAM_KEY);
+        if (!saved) return;
+        const data = JSON.parse(saved);
+        document.querySelectorAll('.team-input').forEach(input => {
+          const field = input.dataset.field;
+          if (data[field]) input.value = data[field];
+        });
+      } catch (e) {}
+    }
+
+    // Enable editing for a section
+    function enableEdit(section) {
+      const cardId = section === 'students' ? 'students-card' : 'guide-card';
+      const card = document.getElementById(cardId);
+      const inputs = card.querySelectorAll('.team-input');
+      inputs.forEach(input => {
+        input.disabled = false;
+        input.style.background = 'var(--bg-primary)';
+        input.style.borderColor = 'var(--accent)';
+      });
+      // Show save, hide edit
+      card.querySelector('.team-btn-edit').style.display = 'none';
+      document.getElementById('save-' + section).style.display = 'inline-flex';
+      // Clear indicator
+      document.getElementById('indicator-' + section).textContent = '';
+      // Focus first input
+      if (inputs.length) inputs[0].focus();
+    }
+
+    // Save data for a section
+    function saveSection(section) {
+      // Save all data to localStorage
+      const data = {};
+      document.querySelectorAll('.team-input').forEach(input => {
+        data[input.dataset.field] = input.value;
+      });
+      try { localStorage.setItem(TEAM_KEY, JSON.stringify(data)); } catch (e) {}
+
+      // Lock fields
+      const cardId = section === 'students' ? 'students-card' : 'guide-card';
+      const card = document.getElementById(cardId);
+      const inputs = card.querySelectorAll('.team-input');
+      inputs.forEach(input => {
+        input.disabled = true;
+        input.style.background = '';
+        input.style.borderColor = '';
+      });
+      // Show edit, hide save
+      card.querySelector('.team-btn-edit').style.display = 'inline-flex';
+      document.getElementById('save-' + section).style.display = 'none';
+      // Show saved indicator
+      const indicator = document.getElementById('indicator-' + section);
+      indicator.textContent = '✓ Saved!';
+      indicator.style.color = 'var(--green)';
+      setTimeout(() => { indicator.style.opacity = '0'; }, 2000);
+      setTimeout(() => { indicator.textContent = ''; indicator.style.opacity = '1'; }, 2500);
+    }
+
+    // Prevent card toggle when interacting with inputs/buttons
+    document.addEventListener('DOMContentLoaded', () => {
+      loadTeamData();
+      document.querySelectorAll('.team-input, .team-btn').forEach(el => {
+        el.addEventListener('click', e => e.stopPropagation());
+      });
+    });
+  </script>
 </body>
 </html>
+

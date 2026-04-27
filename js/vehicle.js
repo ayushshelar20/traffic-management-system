@@ -156,13 +156,74 @@ class Vehicle {
     ctx.fillStyle = 'rgba(200,220,255,0.5)';
     ctx.fillRect(w / 2 - 8, -h / 2 + 2, 6, h - 4);
 
-    // Emergency lights
+    // Emergency lights — Red & Blue
     if (this.isEmergency) {
-      const flash = Date.now() % 500 < 250;
-      ctx.fillStyle = flash ? '#fff' : '#3b82f6';
-      ctx.fillRect(-3, -h / 2 - 2, 6, 4);
-      ctx.fillStyle = flash ? '#3b82f6' : '#fff';
-      ctx.fillRect(-3, h / 2 - 2, 6, 4);
+      const t = Date.now();
+      const flash = t % 400 < 200;
+
+      // Outer alternating red/blue glow
+      const glowSize = 28 + Math.sin(t / 120) * 6;
+      ctx.beginPath();
+      ctx.arc(0, 0, glowSize, 0, Math.PI * 2);
+      ctx.fillStyle = flash
+        ? `rgba(239,68,68,${0.18 + Math.sin(t / 180) * 0.07})`
+        : `rgba(59,130,246,${0.18 + Math.sin(t / 180) * 0.07})`;
+      ctx.fill();
+
+      // Inner glow (opposite color)
+      ctx.beginPath();
+      ctx.arc(0, 0, 15, 0, Math.PI * 2);
+      ctx.fillStyle = flash
+        ? 'rgba(59,130,246,0.12)'
+        : 'rgba(239,68,68,0.12)';
+      ctx.fill();
+
+      // Roof light bar — left side RED
+      ctx.fillStyle = flash ? '#ef4444' : '#7f1d1d';
+      ctx.shadowColor = flash ? '#ef4444' : 'transparent';
+      ctx.shadowBlur = flash ? 12 : 0;
+      ctx.fillRect(-7, -h / 2 - 4, 6, 5);
+      ctx.shadowBlur = 0;
+
+      // Roof light bar — right side BLUE
+      ctx.fillStyle = !flash ? '#3b82f6' : '#1e3a5f';
+      ctx.shadowColor = !flash ? '#3b82f6' : 'transparent';
+      ctx.shadowBlur = !flash ? 12 : 0;
+      ctx.fillRect(1, -h / 2 - 4, 6, 5);
+      ctx.shadowBlur = 0;
+
+      // Bottom strobe — alternating
+      ctx.fillStyle = flash ? '#3b82f6' : '#ef4444';
+      ctx.shadowColor = flash ? '#3b82f6' : '#ef4444';
+      ctx.shadowBlur = 8;
+      ctx.fillRect(-3, h / 2 - 1, 6, 4);
+      ctx.shadowBlur = 0;
+
+      // Side strobes (small dots on sides)
+      ctx.beginPath();
+      ctx.arc(-w / 2 + 3, 0, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = flash ? '#ef4444' : '#3b82f6';
+      ctx.shadowColor = ctx.fillStyle;
+      ctx.shadowBlur = 6;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      ctx.beginPath();
+      ctx.arc(w / 2 - 3, 0, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = flash ? '#3b82f6' : '#ef4444';
+      ctx.shadowColor = ctx.fillStyle;
+      ctx.shadowBlur = 6;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // Bright white headlight
+      ctx.beginPath();
+      ctx.arc(w / 2, 0, 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      ctx.shadowColor = '#fff';
+      ctx.shadowBlur = 10;
+      ctx.fill();
+      ctx.shadowBlur = 0;
     }
 
     ctx.restore();
